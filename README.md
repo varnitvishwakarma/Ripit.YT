@@ -30,13 +30,11 @@ This app uses:
 
 ### 1. Clone the Repo
 
-```bash
+
 git clone https://github.com/yourusername/ripit-yt.git
 cd ripit-yt
 2. Install Dependencies
-bash
-Copy
-Edit
+
 pip install streamlit yt-dlp
 3. Install FFmpeg (if not already installed)
 📦 Windows:
@@ -50,14 +48,9 @@ Restart your PC
 
 Test it by running:
 
-bash
-Copy
-Edit
 ffmpeg -version
 🎯 Usage
-bash
-Copy
-Edit
+
 streamlit run app.py
 Paste a YouTube URL
 
