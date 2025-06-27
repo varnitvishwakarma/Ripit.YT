@@ -76,7 +76,6 @@ Add playlist support
 
 Choose video resolutions
 
-Deploy to the web
 
 ## ⚠️ Disclaimer
 This tool is for educational and personal use only.
