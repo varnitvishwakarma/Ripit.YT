@@ -60,7 +60,7 @@ Boom 💥 — your file is ready!
 
 Files are saved in the downloads/ folder inside your project directory.
 
-##🧃 Why "RipIt.YT"?
+## 🧃 Why "RipIt.YT"?
 We’re ripping the vids (💀)
 
 It sounds cool
