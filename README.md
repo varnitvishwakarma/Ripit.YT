@@ -85,5 +85,5 @@ This tool is for educational and personal use only.
 Please respect YouTube's Terms of Service and do not use this tool to infringe copyright.
 
 
-![image](https://github.com/user-attachments/assets/0db0e120-42a3-4ce1-9bad-aae2f9ce1d63)
+![image](https://github.com/user-attachments/assets/7ffca2bb-a409-4516-9bb5-49ead036017d)
 
