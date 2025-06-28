@@ -3,44 +3,32 @@ import yt_dlp
 import os
 import shutil
 
-# --- Configuration ---
 DOWNLOAD_DIR = "downloads"
 
-# --- Custom CSS ---
 st.markdown("""
     <style>
     html, body, .stApp {
         background: #EFEEE8 !important;
         color: black !important;
     }
-
-    /* Label Colors */
     label,
     .stTextInput > label,
     .stRadio > label {
         color: black !important;
     }
-
-    /* Radio Option Text */
     [data-baseweb="radio"] label {
         color: black !important;
         opacity: 1 !important;
     }
-
-    /* Selected radio option can stay bold */
     [data-baseweb="radio"] label[data-selected="true"] {
         font-weight: bold !important;
         color: black !important;
     }
-
-    /* Input Field Styling */
     .stTextInput input {
         color: black !important;
         background-color: white !important;
         border-radius: 10px !important;
     }
-
-    /* Buttons */
     .stButton > button,
     .stDownloadButton > button {
         background-color: #ff4b4b !important;
@@ -51,15 +39,11 @@ st.markdown("""
         display: block;
         margin: 0 auto;
     }
-
-    /* Centered Custom Text */
     .centered-text {
         text-align: center;
         color: black;
         margin-top: 2rem;
     }
-
-    /* Input and Format Layout */
     .input-container {
         display: flex;
         gap: 10px;
@@ -67,13 +51,11 @@ st.markdown("""
         flex-wrap: wrap;
         margin-bottom: 1rem;
     }
-
     .stTextInput, .stRadio {
         flex: 1;
         min-width: 250px;
         max-width: 100%;
     }
-
     @media (max-width: 768px) {
         .input-container {
             flex-direction: column;
@@ -83,7 +65,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Helper Functions ---
+
 def check_ffmpeg_installed():
     return shutil.which("ffmpeg") is not None
 
@@ -124,10 +106,8 @@ def download_audio(url, output_path):
 
     return downloaded_file if downloaded_file and os.path.exists(downloaded_file) else None
 
-# --- Streamlit App Setup ---
 st.set_page_config(page_title="RipIt.YT", page_icon="📥")
 
-# --- Title + Description ---
 st.markdown("""
 <div class="centered-text">
     <h1>📥 RipIt.YT</h1>
@@ -135,7 +115,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- FFmpeg Check ---
 if not check_ffmpeg_installed():
     st.error(
         "**FFmpeg not found!**\n\n"
@@ -148,13 +127,11 @@ if not check_ffmpeg_installed():
     )
     st.stop()
 
-# --- Input Area ---
 st.markdown('<div class="input-container">', unsafe_allow_html=True)
 url = st.text_input("🎬 YouTube URL", placeholder="https://youtu.be/...")
 choice = st.radio("Format", ["Video (MP4)", "Audio (MP3)"])
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Download Button ---
 if st.button("⬇️ Download"):
     if not url.strip():
         st.warning("⚠️ Please enter a valid YouTube URL.")
@@ -162,7 +139,6 @@ if st.button("⬇️ Download"):
         if not os.path.exists(DOWNLOAD_DIR):
             os.makedirs(DOWNLOAD_DIR)
 
-        # Clear old downloads
         for file in os.listdir(DOWNLOAD_DIR):
             try:
                 os.remove(os.path.join(DOWNLOAD_DIR, file))
@@ -185,9 +161,12 @@ if st.button("⬇️ Download"):
                 else:
                     st.error("❌ File not found after download. Try another link.")
             except Exception as e:
-                st.error(f"❌ Error: {e}")
+                error_msg = str(e)
+                if "Sign in to confirm you’re not a bot" in error_msg or "--cookies" in error_msg:
+                    st.warning("⚠️ This video requires sign-in or is age-restricted. Please try another link.")
+                else:
+                    st.error(f"❌ Error: {e}")
 
-# --- Footer ---
 st.markdown("""
 <div class="centered-text">
     <small>Made with ❤️ using Streamlit and yt-dlp</small>
